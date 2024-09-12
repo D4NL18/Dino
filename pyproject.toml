@@ -1,17 +1,14 @@
 [tool.poetry]
-name = "python-repository-template"
-version = "0.2.0"
-description = "A Python repository template."
+name = "dino"
+version = "0.1.0"
+description = ""
 authors = ["Your Name <you@example.com>"]
-license = "MIT"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "~3.9.13"
+python = "^3.10"
+chrome-trex = {git = "https://github.com/ArielMAJ/chrome-trex-rush", rev = "fix/multi-dino-game"}
 
-[tool.poetry.group.dev.dependencies]
-notebook = "^7.1.2"
-pre-commit = "^3.7.0"
 
 [build-system]
 requires = ["poetry-core"]

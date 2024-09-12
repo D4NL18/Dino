@@ -1,17 +1,24 @@
-"""
-This is the main entry point of the application.
+from chrome_trex import DinoGame, ACTION_UP, ACTION_FORWARD, ACTION_DOWN
 
-Import the bare minimum needed and add any initialization code here.
-"""
+# Create a new game that runs with at most 'fps' frames per second.
+# Use fps=0 for unlimited fps.
+game = DinoGame(60)
 
+# Go to the next frame and take the action 'action'
+# (ACTION_UP, ACTION_FORWARD or ACTION_DOWN).
 
-def main():
-    """
-    Main entry point of the application. This is where the application starts.
-    """
-    print("Hello, World!")
-    return 0
+while(not game.game_over):
+    game.step(ACTION_UP)
 
+    # Get a list of floats representing the game state
+    # (positions of the obstacles and game speed).
+    game.get_state()
 
-if __name__ == "__main__":
-    SystemExit(main())
+    # Get the game score.
+    game.get_score()
+
+    # Reset the game.
+game.reset()
+
+    # Close the game.
+game.close()
