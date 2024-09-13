@@ -1,4 +1,3 @@
-from chrome_trex import DinoGame, ACTION_UP, ACTION_FORWARD, ACTION_DOWN
 from chrome_trex import MultiDinoGame, ACTION_UP, ACTION_FORWARD, ACTION_DOWN
 import numpy as np
 
@@ -24,17 +23,12 @@ def GamePredict(game, actions, states, population):
                 actions.append([ACTION_FORWARD, ACTION_UP, ACTION_DOWN][action])
     return actions
 
-def mutate(weights):
-    #Coeficiente de mutação. Indica o quanto o neurônio será mutado
-    mutation_rate = 0.05
+def mutate(weights, mutation_rate):
     #Gera uma matriz aleatória multiplicada pelo mutation_rate e mistura com os pesos atuais 
     return weights + mutation_rate * np.random.randn(*weights.shape)
 
 
-def GameWithMutate(game, population):
-
-    #Criação do objeto do jogo com 100 dinossauros e 60 fps
-    game = MultiDinoGame(dino_count=100, fps=60)
+def GameWithMutate(game, population, mutation_rate, quantDinos):
 
     #Loop principal do jogo
     while True:
@@ -54,10 +48,10 @@ def GameWithMutate(game, population):
             best_nn = population[best_index]
 
             #Criar nova população
-            population = [NeuralNetwork() for _ in range(100)]
-            for i in range(100):
+            population = [NeuralNetwork() for _ in range(quantDinos)]
+            for i in range(quantDinos):
                 #Nova população vai ter os pesos do melhor dinossauro, sofrendo mutações
-                population[i].weights = mutate(best_nn.weights)
+                population[i].weights = mutate(best_nn.weights, mutation_rate)
 
             #Proxima rodada
             game.reset()
@@ -74,8 +68,7 @@ def crossover(parent1, parent2):
     return child_weights
 
 
-
-def GameWithCrossover(game, population):
+def GameWithCrossover(game, population, mutation_rate, quantDinos):
 
     #Loop principal do jogo
     while True:
@@ -92,19 +85,22 @@ def GameWithCrossover(game, population):
         if game.game_over:
             #Obter as pontuações
             scores = game.get_scores()
-            #Encontrar o melhor e o segundo melhor dinossauro
+            #Encontrar o melhor dinossauro
             best_index = np.argmax(scores)
-            second_best_index = np.argsort(scores)[-2]
             best_nn = population[best_index]
-            second_best_nn = population[second_best_index]
+            # Selecionar um dinossauro aleatório
+            indices = np.arange(len(population))
+            random_indices = indices[indices != best_index]
+            random_index = np.random.choice(random_indices)
+            random_nn = population[random_index]
 
             # Criar nova população
             new_population = []
-            for _ in range(100):
+            for _ in range(quantDinos):
                 #Realizar crossover entre o melhor e o segundo melhor dinossauro
-                child_weights = crossover(best_nn.weights, second_best_nn.weights)
+                child_weights = crossover(best_nn.weights, random_nn.weights)
                 child_nn = NeuralNetwork()
-                child_nn.weights = mutate(child_weights)
+                child_nn.weights = mutate(child_weights, mutation_rate)
                 new_population.append(child_nn)
 
             # Atualizar a população
@@ -113,10 +109,14 @@ def GameWithCrossover(game, population):
             # Próxima rodada
             game.reset()
 
-game = MultiDinoGame(dino_count=100, fps=60)   
+
+quantDinos = 300
+FPS = 500
+
+game = MultiDinoGame(dino_count=quantDinos, fps=FPS)   
 
 #Gera a população com uma rede neural para cada dinossauro
-population = [NeuralNetwork() for _ in range(100)]
+population = [NeuralNetwork() for _ in range(quantDinos)]
 
-#GameWithMutate(game, population)
-GameWithCrossover(game, population)
+#GameWithMutate(game, population, 0.5, quantDinos)
+GameWithCrossover(game, population, 0.3, quantDinos)
