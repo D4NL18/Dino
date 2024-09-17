@@ -118,5 +118,5 @@ game = MultiDinoGame(dino_count=quantDinos, fps=FPS)
 #Gera a população com uma rede neural para cada dinossauro
 population = [NeuralNetwork() for _ in range(quantDinos)]
 
-#GameWithMutate(game, population, 0.5, quantDinos)
+#GameWithMutate(game, population, 0.3, quantDinos)
 GameWithCrossover(game, population, 0.3, quantDinos)
