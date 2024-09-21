@@ -1,4 +1,4 @@
-from chrome_trex import MultiDinoGame, ACTION_UP, ACTION_FORWARD, ACTION_DOWN
+from newDinoGame import MultiDinoGame, ACTION_UP, ACTION_FORWARD, ACTION_DOWN
 import numpy as np
 
 # Criação da rede neural
