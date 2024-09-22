@@ -91,13 +91,13 @@ best_weights = np.array([
                     [-0.1028232 , -0.31744194, -0.06333987]])
 ```
 
-O melhor indivíduo foi colocado para efetuar 30 iterações de rodadas até o game over, onde conforme ele tivesse a tendência de atingir a pontuação infinita, o jogo era encerrado no score de 3000 para que pudessem ser plotados os resultados. Entretanto, será exibido um vídeo onde é possível observar atingindo pontuações próximas de 9999 indicando seu comportamento de não ter uma parada definida.
+Os dinossauros foram colocados para efetuar 30 iterações de rodadas até o game over, onde conforme eles tivesse, a tendência de atingir a pontuação infinita, o jogo era encerrado no score de 3000 para que pudessem ser plotados os resultados. Entretanto, será exibido um vídeo onde é possível observar o melhor indivíduo sem restrições e exibindo seu comportamento de jogar infinitamente.
 
-### Gráfico do comportamento do melhor indivíduo durante as iterações
+### Comportamento dos dinossauros durante as iterações
 
-![Melhor indivíduo Crossover 0.1](images/melhor_individuo_crossover01.jpg)
+![Crossover](images/melhor_individuo_crossover01.jpg)
 
-## Vídeos do melhor indivíduo rodando infinitamente
-[Vídeo do melhor indivíduo alcançando a maior velocidade](https://www.youtube.com/watch?v=SrxXK1frdNM)
-
-[Vídeo do melhor indivíduo rodando infinitamente](https://youtu.be/1r71F7hH4F8)
+## Best Dino
+Por fim, aplicamos a função PlayWithBestDino() para jogar com o nosso melhor dinossauro e observar o comportamento dele.
+### Vídeo do melhor dino rodando infinitamente
+[Vídeo do melhor indivíduo](https://youtu.be/I4whPXl93Gw)

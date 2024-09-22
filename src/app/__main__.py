@@ -129,26 +129,25 @@ def PlayWithBestDino(game, best_weights):
 
 # Pesos do melhor dino
 best_weights = np.array([
-    [ 1.406434   ,  0.69566449,  0.39167457],
-    [ 1.00855213 , -2.00198681,  2.02529955],
-    [-0.57165332 , -1.63564937, -2.12555501],
-    [ 1.04075782 ,  0.90698496,  1.03389469],
-    [-1.23349708 ,  2.42903141,  0.19348851],
-    [ 0.20428421 ,  1.09784212,  0.21218095],
-    [-1.34133199 ,  0.4839961 ,  0.63355765],
-    [ 0.98705877 , -0.95982843, -0.40940713],
-    [ 2.12145384 ,  0.34037733, -0.27393131],
-    [ 0.63297841 , -1.55782141,  1.6729805 ]
-])
+                    [ 0.05873744, -0.18737166,  0.15162923],
+                    [ 0.37904898, -0.29948954, -0.208433  ],
+                    [-0.22294232, -0.39653523, -0.30959169],
+                    [-0.18026223,  0.31192445, -0.52114996],
+                    [ 0.12461262,  0.44634745,  0.29608551],
+                    [ 0.36585901,  0.52571237,  0.18866291],
+                    [-0.20084327,  0.34464733,  0.1182346 ],
+                    [ 0.1549635,   0.17118189,  0.14192513],
+                    [-0.40021329, -0.01655103, -0.33633056],
+                    [-0.1028232 , -0.31744194, -0.06333987]])
 
 quantDinos = 100
 FPS = 500
 game = MultiDinoGame(dino_count=quantDinos, fps=FPS)
 population = [NeuralNetwork() for _ in range(quantDinos)]
 
-GameWithMutate(game, population, 0.3, quantDinos)
+#GameWithMutate(game, population, 0.3, quantDinos)
 #GameWithCrossover(game, population, 0.3, quantDinos)
 
 # Após terminar o algoritmo evolutivo, use a função abaixo para jogar com o melhor dinossauro encontrado:
-#game2 = MultiDinoGame(dino_count=1, fps=FPS)
-#PlayWithBestDino(game2, best_weights)
+game2 = MultiDinoGame(dino_count=1, fps=FPS)
+PlayWithBestDino(game2, best_weights)
